@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krokodillespillet</title>
+<style>
+body {
+background-image: url('/Img/Swamp.jpg.webp');
+background-size: cover;
+}
+
+img {
+height: 150px;
+width: 120px;
+padding: 10px;
+}
+
+div.container{
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 20px;
+color: black;
+font-size: xx-large;
+border: solid white;
+}
+
+input {
+width: 100px;
+height: 30px;
+font-size: large;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="poengDiv" style="font-size: xx-large; color: white;">Poeng: 0</div>
+<img src="/img/schnappi.jpg"> 
+<div id="upperNumber" class="number1"></div>
+<input type="text" id="inputFelt" placeholder="< eller >">
+<div id="lowerNumber" class="number2"></div>
+<br>
+<button onclick="submitAnswer()">Svar her</button> 
+<br>
+<button onclick="resetAnswer()">Klikk for å få tallene!</button>
+</div>
+
+
+<script>
+let upperNumber = 0;
+let lowerNumber = 0;
+let userGuess = document.getElementById('inputFelt');
+let poengDiv = document.getElementById('poengDiv');
+let userGuessValue = userGuess.value;
+
+function getRandomNumber() {
+return Math.floor(Math.random()*10) +1;        //Satte den til +1 så den ikke havner på null. For 0 ga meg litt problemer.
+}
+
+function submitAnswer() {
+upperNumber = getRandomNumber();
+lowerNumber = getRandomNumber();
+if((userGuessValue === '<' && upperNumber < lowerNumber) ||
+(userGuessValue === '>' && upperNumber > lowerNumber)) {
+points++;
+}else {
+points--;
+}
+poengDiv.textContent=`Poeng: ${points}`;      
+}
+
+function resetAnswer() {
+points = 0;
+upperNumber = getRandomNumber();
+lowerNumber = getRandomNumber();
+document.getElementById('upperNumber').textContent = upperNumber;
+document.getElementById('lowerNumber').textContent = lowerNumber;
+poengDiv.textContent = `Poeng: ${points}`;
+}
+
+
+
+
+
+
+</script>
+</body>
+
+</html>
